@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject attackPointRight;
+    [SerializeField] private GameObject attackPointLeft;
+
+    [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float rollSpeed = 2f;
     [SerializeField] private float rollLength = 0.5f;
@@ -11,9 +15,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float leftBorder;
     [SerializeField] private float rightBorder;
     [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private float attackRange = 1f;
 
 
     private Animator playerAnimator;
+    private SpriteRenderer playerSpriteRenderer;
 
     private float newPlayerSpeed;
     private float rollCounter;
@@ -24,11 +30,13 @@ public class PlayerController : MonoBehaviour
     private bool isAttack = false;
     private bool canAttack = true;
 
+    private Collider2D[] hitEnemies;
+
     // Start is called before the first frame update
     void Start()
     {
         newPlayerSpeed = playerSpeed;
-
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
     }
 
@@ -42,12 +50,27 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack()
     {
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (Input.GetMouseButtonDown(0) && canAttack && !playerAnimator.GetBool("SpaceBool"))
         {
             canAttack = false;
             isAttack = true;
             playerAnimator.Play("Attack");
             playerAnimator.SetBool("IsAttacking", isAttack);
+
+            if (attackPointRight.activeSelf)
+            {
+                hitEnemies = Physics2D.OverlapCircleAll(attackPointRight.transform.position, attackRange, enemyLayers);
+            }
+            else if (attackPointLeft.activeSelf)
+            {
+                hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.transform.position, attackRange, enemyLayers);
+            }
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("Enemy Hit");
+            }
+
             startCooldown = attackCooldown;
         }
 
@@ -58,7 +81,6 @@ public class PlayerController : MonoBehaviour
 
         if (startCooldown <= 0)
         {
-            Debug.Log(attackCooldown);
             canAttack = true;
         }
     }
@@ -74,7 +96,26 @@ public class PlayerController : MonoBehaviour
         if (!isAttack)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
-            GetComponent<Animator>().SetFloat("Horizontal", horizontalInput);
+
+            switch (horizontalInput)
+            {
+                case 1:
+                    playerAnimator.SetBool("IsMoving", true);
+                    attackPointRight.SetActive(true);
+                    attackPointLeft.SetActive(false);
+                    playerSpriteRenderer.flipX = false;
+                    break;
+                case -1:
+                    playerAnimator.SetBool("IsMoving", true);
+                    attackPointLeft.SetActive(true);
+                    attackPointRight.SetActive(false);
+                    playerSpriteRenderer.flipX = true;
+                    break;
+                case 0:
+                    playerAnimator.SetBool("IsMoving", false);
+                    break;
+            }
+
             gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
             if (gameObject.transform.position.x < -leftBorder)
             {
@@ -89,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void RollPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && (horizontalInput > 0 || horizontalInput < 0))
+        if (Input.GetKeyDown(KeyCode.Space) && !isAttack && (horizontalInput > 0 || horizontalInput < 0))
         {
             if (rollCoolCounter <= 0 && rollCounter <= 0)
             {
