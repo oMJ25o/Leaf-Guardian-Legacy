@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected EnemyData enemyData;
-    [SerializeField] protected GameObject enemyHpBar;
+    [SerializeField] private EnemyData enemyData;
+    [SerializeField] private GameObject enemyHpBar;
     [HideInInspector] public float currentHp;
     [HideInInspector] public float maxHp;
     [HideInInspector] public int attackDamage;
-    protected float moveSpeed;
+    private float moveSpeed;
     [HideInInspector] public int exp;
 
-    protected float attackCooldown = 1.5f;
-    protected bool nearTarget = false;
-    protected Animator enemyAnimator;
+    private float attackCooldown = 1.5f;
+    private bool nearTarget = false;
+    private Animator enemyAnimator;
+    private SettlementController settlementController;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,17 @@ public class Enemy : MonoBehaviour
         MoveEnemy();
     }
 
+    private void SetupEnemy()
+    {
+        currentHp = enemyData.hp * settlementController.settlementLvl;
+        maxHp = enemyData.hp * settlementController.settlementLvl;
+        attackDamage = enemyData.attackDamage * settlementController.settlementLvl;
+        moveSpeed = enemyData.moveSpeed;
+        exp = enemyData.exp;
+        enemyAnimator = GetComponent<Animator>();
+        settlementController = GameObject.Find("Tower Tile Set").GetComponent<SettlementController>();
+    }
+
     public void TakeDamage(int damageTaken)
     {
         enemyAnimator.Play("TakeDamage");
@@ -35,6 +47,8 @@ public class Enemy : MonoBehaviour
         UpdateHealthBar();
         if (currentHp <= 0)
         {
+            settlementController.settlementCurrentExp += exp;
+            settlementController.SettlementDisplay();
             Destroy(gameObject);
         }
     }
@@ -42,16 +56,6 @@ public class Enemy : MonoBehaviour
     private void UpdateHealthBar()
     {
         enemyHpBar.transform.localScale = new Vector3((currentHp / maxHp), enemyHpBar.transform.localScale.y, enemyHpBar.transform.localScale.z);
-    }
-
-    private void SetupEnemy()
-    {
-        currentHp = enemyData.hp;
-        maxHp = enemyData.hp;
-        attackDamage = enemyData.attackDamage;
-        moveSpeed = enemyData.moveSpeed;
-        exp = enemyData.exp;
-        enemyAnimator = GetComponent<Animator>();
     }
 
     private void MoveEnemy()
@@ -65,6 +69,8 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         enemyAnimator.Play("Attack");
+        settlementController.settlementCurrentHp -= attackDamage;
+        settlementController.SettlementDisplay();
         Invoke("Attack", attackCooldown);
     }
 
