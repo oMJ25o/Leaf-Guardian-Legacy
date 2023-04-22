@@ -2,27 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeafController : MonoBehaviour
+public abstract class LeafController : MonoBehaviour
 {
-    private int leafCollected = 0;
+    [SerializeField] protected PlayerController playerController;
+
     // Start is called before the first frame update
-    void Start()
+
+
+
+    protected virtual void OnParticleCollision(GameObject other)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            leafCollected += 1;
-            Debug.Log("Leaf Collected: " + leafCollected);
-        }
+        playerController.UpdateLeafCount();
     }
 }

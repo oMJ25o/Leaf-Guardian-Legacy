@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   attackDamage: 40
-  moveSpeed: 10
+  moveSpeed: 5
   exp: 50

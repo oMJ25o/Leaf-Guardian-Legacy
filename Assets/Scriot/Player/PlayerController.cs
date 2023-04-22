@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private TMP_Text lightLeafCountText;
+    [SerializeField] private TMP_Text darkLeafCountText;
     [SerializeField] private GameObject attackPointRight;
     [SerializeField] private GameObject attackPointLeft;
     [SerializeField] private GameObject weaponShop;
@@ -23,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerSpriteRenderer;
 
+    private int attackDamage;
+    [HideInInspector] public int lightLeaf;
+    [HideInInspector] public int darkLeaf;
     private float newPlayerSpeed;
     private float rollCounter;
     private float rollCoolCounter;
@@ -37,6 +44,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attackDamage = playerData.attackDamage;
+        lightLeaf = playerData.lightleaf;
+        darkLeaf = playerData.darkleaf;
+        UpdateLeafCount();
+
         newPlayerSpeed = playerSpeed;
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
@@ -50,6 +62,12 @@ public class PlayerController : MonoBehaviour
         PlayerAttack();
     }
 
+    public void UpdateLeafCount()
+    {
+        lightLeafCountText.text = "x" + lightLeaf;
+        darkLeafCountText.text = "x" + darkLeaf;
+    }
+
     private void PlayerAttack()
     {
         if (Input.GetMouseButtonDown(0) && canAttack && !playerAnimator.GetBool("SpaceBool"))
@@ -58,21 +76,6 @@ public class PlayerController : MonoBehaviour
             isAttack = true;
             playerAnimator.Play("Attack");
             playerAnimator.SetBool("IsAttacking", isAttack);
-
-            if (attackPointRight.activeSelf)
-            {
-                hitEnemies = Physics2D.OverlapCircleAll(attackPointRight.transform.position, attackRange, enemyLayers);
-            }
-            else if (attackPointLeft.activeSelf)
-            {
-                hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.transform.position, attackRange, enemyLayers);
-            }
-
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("Enemy Hit");
-            }
-
             startCooldown = attackCooldown;
         }
 
@@ -84,6 +87,23 @@ public class PlayerController : MonoBehaviour
         if (startCooldown <= 0)
         {
             canAttack = true;
+        }
+    }
+
+    private void HitEnemies()
+    {
+        if (attackPointRight.activeSelf)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointRight.transform.position, attackRange, enemyLayers);
+        }
+        else if (attackPointLeft.activeSelf)
+        {
+            hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.transform.position, attackRange, enemyLayers);
+        }
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
     }
 
