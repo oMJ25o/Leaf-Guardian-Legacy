@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject attackPointRight;
     [SerializeField] private GameObject attackPointLeft;
+    [SerializeField] private GameObject weaponShop;
+    [SerializeField] private GameObject settlementShop;
 
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private float playerSpeed = 5f;
@@ -160,7 +162,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Particle Triggered!");
+        if (other.gameObject.CompareTag("WeaponShop"))
+        {
+            weaponShop.SetActive(true);
+        }
+        else if (other.gameObject.CompareTag("SettlementShop"))
+        {
+            settlementShop.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("WeaponShop"))
+        {
+            weaponShop.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("SettlementShop"))
+        {
+            settlementShop.SetActive(false);
+        }
+
     }
 
 }

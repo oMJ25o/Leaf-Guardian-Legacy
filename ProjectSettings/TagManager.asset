@@ -8,6 +8,8 @@ TagManager:
   - Leaf
   - Enemy
   - Tower
+  - WeaponShop
+  - SettlementShop
   layers:
   - Default
   - TransparentFX
