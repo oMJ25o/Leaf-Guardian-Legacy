@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rollCoolDown = 1f;
     [SerializeField] private float leftBorder;
     [SerializeField] private float rightBorder;
-    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private float attackCooldown = 1f;
 
 
     private Animator playerAnimator;
@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack()
     {
-        Debug.Log(canAttack);
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
             canAttack = false;
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
         if (startCooldown <= 0)
         {
-            Debug.Log("Can Attack");
+            Debug.Log(attackCooldown);
             canAttack = true;
         }
     }
