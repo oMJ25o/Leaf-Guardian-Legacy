@@ -31,13 +31,13 @@ public class Enemy : MonoBehaviour
 
     private void SetupEnemy()
     {
+        settlementController = GameObject.Find("Tower Tile Set").GetComponent<SettlementController>();
         currentHp = enemyData.hp * settlementController.settlementLvl;
         maxHp = enemyData.hp * settlementController.settlementLvl;
         attackDamage = enemyData.attackDamage * settlementController.settlementLvl;
         moveSpeed = enemyData.moveSpeed;
         exp = enemyData.exp;
         enemyAnimator = GetComponent<Animator>();
-        settlementController = GameObject.Find("Tower Tile Set").GetComponent<SettlementController>();
     }
 
     public void TakeDamage(int damageTaken)
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         if (currentHp <= 0)
         {
             settlementController.settlementCurrentExp += exp;
+            settlementController.CheckExpToLevelUp();
             settlementController.SettlementDisplay();
             Destroy(gameObject);
         }

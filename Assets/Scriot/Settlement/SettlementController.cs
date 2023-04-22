@@ -8,7 +8,7 @@ public class SettlementController : MonoBehaviour
     public float settlementMaxHp = 100f;
     public int settlementLvl = 1;
     public float settlementCurrentExp = 0;
-    [SerializeField] private int settlementExpToLevelUp = 100;
+    [SerializeField] private int settlementExpToLevelUp = 50;
 
     [SerializeField] private GameObject settlementHpBar;
     [SerializeField] private GameObject settlementExpBar;

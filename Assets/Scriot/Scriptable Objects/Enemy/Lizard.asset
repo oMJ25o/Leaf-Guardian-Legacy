@@ -15,4 +15,4 @@ MonoBehaviour:
   hp: 30
   attackDamage: 5
   moveSpeed: 5
-  exp: 5
+  exp: 10
