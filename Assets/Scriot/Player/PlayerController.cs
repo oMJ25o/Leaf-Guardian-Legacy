@@ -74,4 +74,9 @@ public class PlayerController : MonoBehaviour
         rollCoolCounter = rollCoolDown;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Particle Triggered!");
+    }
+
 }
