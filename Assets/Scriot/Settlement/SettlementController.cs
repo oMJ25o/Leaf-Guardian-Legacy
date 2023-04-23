@@ -9,7 +9,9 @@ public class SettlementController : MonoBehaviour
     public int settlementLvl = 1;
     public float settlementCurrentExp = 0;
     [SerializeField] private int settlementExpToLevelUp = 50;
-
+    [SerializeField] private ParticleSystem hurtParticles;
+    [SerializeField] private ParticleSystem hurtParticles2;
+    [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private GameObject settlementHpBar;
     [SerializeField] private GameObject settlementExpBar;
     [SerializeField] private TMP_Text settlementLevelText;
@@ -30,6 +32,12 @@ public class SettlementController : MonoBehaviour
 
     }
 
+    public void PlayHurtParticles()
+    {
+        hurtParticles.Play();
+        hurtParticles2.Play();
+    }
+
     public void SettlementDisplay()
     {
         settlementLevelText.text = "Lvl: " + settlementLvl;
@@ -47,6 +55,7 @@ public class SettlementController : MonoBehaviour
             settlementMaxHp += 20;
             settlementCurrentHp = settlementMaxHp;
             SettlementDisplay();
+            spawnManager.SetupRampageEvent();
         }
     }
 

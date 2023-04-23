@@ -12,6 +12,7 @@ TagManager:
   - SettlementShop
   - SettlementHealth
   - AttackPoint
+  - InsideSettlement
   layers:
   - Default
   - TransparentFX

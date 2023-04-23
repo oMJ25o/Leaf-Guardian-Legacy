@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private AudioClip attackSfx;
+    [SerializeField] private Animator attackFXRight;
+    [SerializeField] private Animator attackFXLeft;
     [SerializeField] private TMP_Text lightLeafCountText;
     [SerializeField] private TMP_Text darkLeafCountText;
     [SerializeField] private GameObject attackPointRight;
@@ -39,8 +41,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isAttack = false;
     private bool canAttack = true;
+    private bool isInsideSettlement = true;
 
     private Collider2D[] hitEnemies;
+    private Animator trueAttackFX;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +65,12 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         RollPlayer();
         PlayerAttack();
+
+        if (GameManager.Instance.isGameOver)
+        {
+            weaponShop.SetActive(false);
+            weaponShop.SetActive(false);
+        }
     }
 
     private void PlayAttackSFX()
@@ -76,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack()
     {
-        if (Input.GetMouseButtonDown(0) && canAttack && !playerAnimator.GetBool("SpaceBool"))
+        if (Input.GetMouseButtonDown(0) && canAttack && !playerAnimator.GetBool("SpaceBool") && !isInsideSettlement && !GameManager.Instance.isGameOver)
         {
             canAttack = false;
             isAttack = true;
@@ -100,15 +110,18 @@ public class PlayerController : MonoBehaviour
     {
         if (attackPointRight.activeSelf)
         {
+            trueAttackFX = attackFXRight;
             hitEnemies = Physics2D.OverlapCircleAll(attackPointRight.transform.position, attackRange, enemyLayers);
         }
         else if (attackPointLeft.activeSelf)
         {
+            trueAttackFX = attackFXLeft;
             hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.transform.position, attackRange, enemyLayers);
         }
 
         if (hitEnemies.Length >= 1)
         {
+            trueAttackFX.Play("AttackFX");
             GetComponent<AudioSource>().PlayOneShot(attackSfx);
         }
 
@@ -126,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (!isAttack)
+        if (!isAttack && !GameManager.Instance.isGameOver)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
 
@@ -163,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
     private void RollPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isAttack && (horizontalInput > 0 || horizontalInput < 0))
+        if (Input.GetKeyDown(KeyCode.Space) && !isAttack && (horizontalInput > 0 || horizontalInput < 0) && !GameManager.Instance.isGameOver)
         {
             if (rollCoolCounter <= 0 && rollCounter <= 0)
             {
@@ -193,14 +206,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("WeaponShop"))
+        if (other.gameObject.CompareTag("WeaponShop") && !GameManager.Instance.isGameOver)
         {
             weaponShop.SetActive(true);
         }
-        else if (other.gameObject.CompareTag("SettlementShop"))
+        else if (other.gameObject.CompareTag("SettlementShop") && !GameManager.Instance.isGameOver)
         {
             settlementShop.SetActive(true);
         }
+        else if (other.gameObject.CompareTag("InsideSettlement") && !GameManager.Instance.isGameOver)
+        {
+            isInsideSettlement = true;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -212,6 +230,10 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.CompareTag("SettlementShop"))
         {
             settlementShop.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("InsideSettlement"))
+        {
+            isInsideSettlement = false;
         }
 
     }

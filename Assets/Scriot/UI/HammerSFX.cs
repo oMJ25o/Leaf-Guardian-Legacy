@@ -21,9 +21,12 @@ public class HammerSFX : MonoBehaviour
 
     private void PlayFixSFX()
     {
-        audioSource.PlayOneShot(fixSfx);
-        settlementController.SettlementDisplay();
-
+        if (!GameManager.Instance.isGameOver)
+        {
+            audioSource.PlayOneShot(fixSfx);
+            settlementController.settlementCurrentHp = settlementController.settlementMaxHp;
+            settlementController.SettlementDisplay();
+        }
     }
 
     private void FixFinish()

@@ -71,15 +71,27 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        enemyAnimator.Play("Attack");
-        settlementController.settlementCurrentHp -= attackDamage;
-        settlementController.SettlementDisplay();
-        Invoke("Attack", attackCooldown);
+        if (!GameManager.Instance.isGameOver)
+        {
+            enemyAnimator.Play("Attack");
+            Invoke("Attack", attackCooldown);
+        }
     }
 
     private void PlayAttackSFX()
     {
+        settlementController.PlayHurtParticles();
+        settlementController.settlementCurrentHp -= attackDamage;
         audioSource.PlayOneShot(attackSfx);
+
+        if (settlementController.settlementCurrentHp <= 0)
+        {
+            settlementController.settlementCurrentHp = 0;
+            GameManager.Instance.isGameOver = true;
+            GameManager.Instance.StartGameOver();
+        }
+
+        settlementController.SettlementDisplay();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

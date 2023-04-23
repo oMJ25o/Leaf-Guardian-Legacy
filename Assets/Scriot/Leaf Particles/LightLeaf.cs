@@ -18,7 +18,7 @@ public class LightLeaf : LeafController
 
     protected override void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !GameManager.Instance.isGameOver)
         {
             playerController.lightLeaf += 1;
             base.OnParticleCollision(other);

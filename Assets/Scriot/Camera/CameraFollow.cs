@@ -9,6 +9,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private GameObject settlementHpObject;
     [SerializeField] private GameObject settlementLvlObject;
     [SerializeField] private GameObject settlementHpBar;
+    [SerializeField] private AudioClip rampageEventMusic;
+    [SerializeField] private AudioClip normalMusic;
+    [SerializeField] private AudioClip gameOverMusic;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private SettlementController settlementController;
     [SerializeField] private TMP_Text settlementLvlText;
     [SerializeField] private float yOffSet = 5f;
@@ -24,6 +28,27 @@ public class CameraFollow : MonoBehaviour
     {
         gameObject.transform.position = new Vector3(player.transform.position.x, yOffSet, zPos);
         UpdateSettlementDisplay();
+    }
+
+    public void PlayRampageEventMusic()
+    {
+        audioSource.clip = rampageEventMusic;
+        audioSource.Play();
+    }
+
+    public void PlayNormalMusic()
+    {
+        if (audioSource.clip != normalMusic)
+        {
+            audioSource.clip = normalMusic;
+            audioSource.Play();
+        }
+    }
+
+    public void PlayGameOverMusic()
+    {
+        audioSource.clip = gameOverMusic;
+        audioSource.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

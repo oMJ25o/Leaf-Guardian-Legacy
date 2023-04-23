@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dd7127298f4214c9aca18607243a04, type: 3}
   m_Name: Tyrannosaurus
   m_EditorClassIdentifier: 
-  hp: 70
+  hp: 55
   attackDamage: 25
   moveSpeed: 5
-  exp: 50
+  exp: 55
