@@ -30,7 +30,7 @@ public class WeaponShop : ShopManager
 
     public override void BuyUpgrades()
     {
-        if (CheckEnoughCurrency(playerAttackDamageUpgradeCost, playerController.lightLeaf))
+        if (CheckEnoughCurrency(CalculateCost(playerAttackDamageUpgradeCost), playerController.lightLeaf))
         {
             audioSource.PlayOneShot(buySfx);
             playerController.lightLeaf -= CalculateCost(playerAttackDamageUpgradeCost);

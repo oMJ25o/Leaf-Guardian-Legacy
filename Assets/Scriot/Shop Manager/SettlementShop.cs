@@ -35,7 +35,7 @@ public class SettlementShop : ShopManager
         switch (upgradeName)
         {
             case "SettlementHp":
-                if (CheckEnoughCurrency(settlementHpUpgradeCost, playerController.darkLeaf))
+                if (CheckEnoughCurrency(CalculateCost(settlementHpUpgradeCost), playerController.darkLeaf))
                 {
                     audioSource.PlayOneShot(buySfx);
                     playerController.darkLeaf -= CalculateCost(settlementHpUpgradeCost);

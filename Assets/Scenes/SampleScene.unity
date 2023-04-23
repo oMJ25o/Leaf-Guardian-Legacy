@@ -914,6 +914,7 @@ GameObject:
   - component: {fileID: 108537098}
   - component: {fileID: 108537097}
   - component: {fileID: 108537099}
+  - component: {fileID: 108537100}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -1001,7 +1002,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1038,6 +1039,27 @@ MonoBehaviour:
           m_StringArgument: SettlementHp
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &108537100
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108537095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d18a21ec0024af4983bfa69023ef125, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &156160670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,7 +1484,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03139937, y: 0.23549497}
+  m_Offset: {x: -0.008443832, y: 0.23549497}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1473,7 +1495,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8791811, y: 1.4709897}
+  m_Size: {x: 2.6317787, y: 1.4709897}
   m_EdgeRadius: 0
 --- !u!4 &366017809
 Transform:
@@ -12772,6 +12794,7 @@ GameObject:
   - component: {fileID: 763877015}
   - component: {fileID: 763877014}
   - component: {fileID: 763877016}
+  - component: {fileID: 763877017}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -12859,7 +12882,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -12896,6 +12919,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &763877017
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763877012}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d18a21ec0024af4983bfa69023ef125, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &782694985
 GameObject:
   m_ObjectHideFlags: 0
@@ -13848,6 +13892,7 @@ GameObject:
   - component: {fileID: 1129906985}
   - component: {fileID: 1129906987}
   - component: {fileID: 1129906986}
+  - component: {fileID: 1129906988}
   m_Layer: 5
   m_Name: ArrowSettlementShop
   m_TagString: Untagged
@@ -13913,6 +13958,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129906984}
   m_CullTransparentMesh: 1
+--- !u!95 &1129906988
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129906984}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38dafef1d81cbc54cbc8433d1ed8a173, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1149376047
 GameObject:
   m_ObjectHideFlags: 0
@@ -19642,6 +19708,7 @@ GameObject:
   - component: {fileID: 1425566411}
   - component: {fileID: 1425566413}
   - component: {fileID: 1425566412}
+  - component: {fileID: 1425566414}
   m_Layer: 5
   m_Name: ArrowWeaponShop
   m_TagString: Untagged
@@ -19707,6 +19774,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425566410}
   m_CullTransparentMesh: 1
+--- !u!95 &1425566414
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425566410}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38dafef1d81cbc54cbc8433d1ed8a173, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1429705131
 GameObject:
   m_ObjectHideFlags: 0
@@ -41511,7 +41599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150.77002, y: 29.113007}
+  m_AnchoredPosition: {x: 150.77002, y: 29.112976}
   m_SizeDelta: {x: 301.54, y: 58.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1843268542
@@ -41625,7 +41713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -400, y: -5.0500183}
+  m_AnchoredPosition: {x: -400, y: -5.049988}
   m_SizeDelta: {x: 800.06006, y: 10.100006}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1869604036
@@ -44888,7 +44976,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03139937, y: 0.23549497}
+  m_Offset: {x: 0.017555714, y: 0.23549497}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -44899,7 +44987,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8791811, y: 1.4709897}
+  m_Size: {x: 3.2246714, y: 1.4709897}
   m_EdgeRadius: 0
 --- !u!4 &1922727614
 Transform:
@@ -45654,6 +45742,7 @@ GameObject:
   - component: {fileID: 2105706350}
   - component: {fileID: 2105706349}
   - component: {fileID: 2105706351}
+  - component: {fileID: 2105706352}
   m_Layer: 5
   m_Name: RepairButton
   m_TagString: Untagged
@@ -45744,7 +45833,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -45781,6 +45870,27 @@ MonoBehaviour:
           m_StringArgument: Repair
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &2105706352
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105706347}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d18a21ec0024af4983bfa69023ef125, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2143222252
 GameObject:
   m_ObjectHideFlags: 0
