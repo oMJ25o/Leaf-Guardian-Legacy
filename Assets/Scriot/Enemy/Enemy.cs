@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private GameObject enemyHpBar;
+    [SerializeField] private AudioClip attackSfx;
+    [SerializeField] private AudioSource audioSource;
     [HideInInspector] public float currentHp;
     [HideInInspector] public float maxHp;
     [HideInInspector] public int attackDamage;
@@ -34,7 +36,7 @@ public class Enemy : MonoBehaviour
         settlementController = GameObject.Find("Tower Tile Set").GetComponent<SettlementController>();
         currentHp = enemyData.hp * settlementController.settlementLvl;
         maxHp = enemyData.hp * settlementController.settlementLvl;
-        attackDamage = enemyData.attackDamage * settlementController.settlementLvl;
+        attackDamage = enemyData.attackDamage;
         moveSpeed = enemyData.moveSpeed;
         exp = enemyData.exp;
         enemyAnimator = GetComponent<Animator>();
@@ -73,6 +75,11 @@ public class Enemy : MonoBehaviour
         settlementController.settlementCurrentHp -= attackDamage;
         settlementController.SettlementDisplay();
         Invoke("Attack", attackCooldown);
+    }
+
+    private void PlayAttackSFX()
+    {
+        audioSource.PlayOneShot(attackSfx);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

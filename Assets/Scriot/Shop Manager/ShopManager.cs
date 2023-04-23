@@ -7,6 +7,8 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] protected PlayerController playerController;
     [SerializeField] protected int upgradeCount;
+    [SerializeField] protected AudioClip buySfx;
+    [SerializeField] protected AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()

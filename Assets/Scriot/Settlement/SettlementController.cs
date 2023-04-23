@@ -42,8 +42,8 @@ public class SettlementController : MonoBehaviour
         if (settlementCurrentExp >= settlementMaxExp)
         {
             settlementCurrentExp = 0;
-            settlementMaxExp = ((settlementExpToLevelUp * settlementLvl) - (25 * settlementLvl));
             settlementLvl += 1;
+            settlementMaxExp *= settlementLvl;
             settlementMaxHp += 20;
             settlementCurrentHp = settlementMaxHp;
             SettlementDisplay();

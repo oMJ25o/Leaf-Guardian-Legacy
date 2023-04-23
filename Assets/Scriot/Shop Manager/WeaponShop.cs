@@ -32,8 +32,8 @@ public class WeaponShop : ShopManager
     {
         if (CheckEnoughCurrency(playerAttackDamageUpgradeCost, playerController.lightLeaf))
         {
-            Debug.Log("Bought Upgrade");
-            playerController.lightLeaf -= playerAttackDamageUpgradeCost;
+            audioSource.PlayOneShot(buySfx);
+            playerController.lightLeaf -= CalculateCost(playerAttackDamageUpgradeCost);
             playerController.attackDamage += playerAttackDamageUpgrade;
             upgradeCount += 1;
             playerController.UpdateLeafCount();

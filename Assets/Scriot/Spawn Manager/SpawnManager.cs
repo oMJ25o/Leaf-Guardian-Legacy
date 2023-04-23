@@ -34,12 +34,18 @@ public class SpawnManager : MonoBehaviour
                 Instantiate(enemyPrefabs[2], enemyPrefabs[2].transform.position, enemyPrefabs[2].transform.rotation);
                 break;
             case 4:
+                Instantiate(enemyPrefabs[3], enemyPrefabs[3].transform.position, enemyPrefabs[3].transform.rotation);
+                break;
+            case 5:
+                Instantiate(enemyPrefabs[4], enemyPrefabs[4].transform.position, enemyPrefabs[4].transform.rotation);
+                break;
+            case >= 6:
                 int randomIndex = Random.Range(0, enemyPrefabs.Length);
                 Instantiate(enemyPrefabs[randomIndex], enemyPrefabs[randomIndex].transform.position, enemyPrefabs[randomIndex].transform.rotation);
                 break;
         }
 
-        spawnInterval = Random.Range(2, 7);
+        spawnInterval = Random.Range(5, 10);
         Invoke("SpawnEnemy", (spawnInterval));
     }
 

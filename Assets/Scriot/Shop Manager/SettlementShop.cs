@@ -6,6 +6,7 @@ using TMPro;
 public class SettlementShop : ShopManager
 {
     [SerializeField] protected SettlementController settlementController;
+    [SerializeField] protected GameObject hammerAnimationObject;
     [SerializeField] protected TMP_Text settlementHpUpgradeCostText;
     [SerializeField] protected TMP_Text settlementHpRepairCostText;
     [SerializeField] protected TMP_Text settlementHpUpgradeText;
@@ -36,7 +37,8 @@ public class SettlementShop : ShopManager
             case "SettlementHp":
                 if (CheckEnoughCurrency(settlementHpUpgradeCost, playerController.darkLeaf))
                 {
-                    playerController.darkLeaf -= settlementHpUpgradeCost;
+                    audioSource.PlayOneShot(buySfx);
+                    playerController.darkLeaf -= CalculateCost(settlementHpUpgradeCost);
                     settlementController.settlementMaxHp += settlementHpUpgrade;
                     settlementController.settlementCurrentHp += settlementHpUpgrade;
                     settlementController.SettlementDisplay();
@@ -48,9 +50,10 @@ public class SettlementShop : ShopManager
             case "Repair":
                 if (CheckEnoughCurrency(settlementRepairCost, playerController.darkLeaf))
                 {
+                    audioSource.PlayOneShot(buySfx);
                     playerController.darkLeaf -= settlementRepairCost;
                     settlementController.settlementCurrentHp = settlementController.settlementMaxHp;
-                    settlementController.SettlementDisplay();
+                    hammerAnimationObject.SetActive(true);
                     playerController.UpdateLeafCount();
                 }
                 return;

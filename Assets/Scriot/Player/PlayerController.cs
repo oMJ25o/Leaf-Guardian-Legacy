@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private AudioClip attackSfx;
     [SerializeField] private TMP_Text lightLeafCountText;
     [SerializeField] private TMP_Text darkLeafCountText;
     [SerializeField] private GameObject attackPointRight;
@@ -62,6 +63,11 @@ public class PlayerController : MonoBehaviour
         PlayerAttack();
     }
 
+    private void PlayAttackSFX()
+    {
+        GetComponent<AudioSource>().PlayOneShot(attackSfx);
+    }
+
     public void UpdateLeafCount()
     {
         lightLeafCountText.text = "x" + lightLeaf;
@@ -99,6 +105,11 @@ public class PlayerController : MonoBehaviour
         else if (attackPointLeft.activeSelf)
         {
             hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.transform.position, attackRange, enemyLayers);
+        }
+
+        if (hitEnemies.Length >= 1)
+        {
+            GetComponent<AudioSource>().PlayOneShot(attackSfx);
         }
 
         foreach (Collider2D enemy in hitEnemies)
