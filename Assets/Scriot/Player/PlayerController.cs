@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerSpriteRenderer;
 
-    private int attackDamage;
+    [HideInInspector] public int attackDamage;
     [HideInInspector] public int lightLeaf;
     [HideInInspector] public int darkLeaf;
     private float newPlayerSpeed;
