@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settlementHp;
     [SerializeField] private GameObject inventory;
     [SerializeField] private CameraFollow cam;
+    [SerializeField] private GameObject gameOverUI;
 
     [HideInInspector] public bool isGameOver = false;
 
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver)
         {
             cam.PlayGameOverMusic();
+            gameOverUI.SetActive(true);
         }
 
     }

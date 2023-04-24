@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   lightleaf: 0
-  darkleaf: 0
+  darkleaf: 500
