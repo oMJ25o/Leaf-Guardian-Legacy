@@ -28,7 +28,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveEnemy();
+        if (!enemyAnimator.GetBool("Dead"))
+        {
+            MoveEnemy();
+        }
     }
 
     private void SetupEnemy()
@@ -44,16 +47,25 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageTaken)
     {
-        enemyAnimator.Play("TakeDamage");
-        currentHp -= damageTaken;
-        UpdateHealthBar();
-        if (currentHp <= 0)
+        if (!enemyAnimator.GetBool("Dead"))
         {
-            settlementController.settlementCurrentExp += exp;
-            settlementController.CheckExpToLevelUp();
-            settlementController.SettlementDisplay();
-            Destroy(gameObject);
+            enemyAnimator.Play("TakeDamage");
+            currentHp -= damageTaken;
+            if (currentHp <= 0)
+            {
+                currentHp = 0;
+                settlementController.settlementCurrentExp += exp;
+                settlementController.CheckExpToLevelUp();
+                settlementController.SettlementDisplay();
+                enemyAnimator.SetBool("Dead", true);
+            }
+            UpdateHealthBar();
         }
+    }
+
+    public void EnemyDespawn()
+    {
+        Destroy(gameObject);
     }
 
     private void UpdateHealthBar()
@@ -63,7 +75,7 @@ public class Enemy : MonoBehaviour
 
     private void MoveEnemy()
     {
-        if (!nearTarget)
+        if (!nearTarget && !enemyAnimator.GetBool("Dead"))
         {
             gameObject.transform.Translate(-transform.right * moveSpeed * Time.deltaTime);
         }
@@ -71,7 +83,7 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        if (!GameManager.Instance.isGameOver)
+        if (!GameManager.Instance.isGameOver && !enemyAnimator.GetBool("Dead"))
         {
             enemyAnimator.Play("Attack");
             Invoke("Attack", attackCooldown);

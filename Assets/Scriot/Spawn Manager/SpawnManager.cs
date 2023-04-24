@@ -7,12 +7,13 @@ public class SpawnManager : MonoBehaviour
     [HideInInspector] public static bool isGameOver = false;
 
     [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private float spawnInterval;
     [SerializeField] private SettlementController settlementController;
     [SerializeField] private GameObject rampageEventText;
     [SerializeField] private CameraFollow cam;
+    [SerializeField] private int rampageEventTimer;
 
-
+    private int rampageCurrentTimer;
+    private float spawnInterval;
     private bool isRampage = false;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class SpawnManager : MonoBehaviour
             rampageEventText.SetActive(false);
             isRampage = false;
             StopAllCoroutines();
+            rampageCurrentTimer = rampageEventTimer;
             StartCoroutine("StartRampageCountDown");
         }
 
@@ -45,9 +47,19 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator StartRampageCountDown()
     {
-        yield return new WaitForSeconds(50);
+        while (rampageCurrentTimer > 0)
+        {
+            yield return new WaitForSeconds(1);
+            rampageCurrentTimer -= 1;
+            if (rampageCurrentTimer == 5)
+            {
+                rampageEventText.SetActive(true);
+                rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Incoming Rampage";
+            }
+        }
         isRampage = true;
-        rampageEventText.SetActive(true);
+        rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Rampage Event";
+        rampageEventText.GetComponent<Animator>().Play("Entrance");
         cam.PlayRampageEventMusic();
         StartCoroutine("StartRampageTimer");
     }
@@ -58,6 +70,7 @@ public class SpawnManager : MonoBehaviour
         isRampage = false;
         rampageEventText.SetActive(false);
         cam.PlayNormalMusic();
+        rampageCurrentTimer = rampageEventTimer;
         StartCoroutine("StartRampageCountDown");
     }
 
@@ -95,10 +108,14 @@ public class SpawnManager : MonoBehaviour
             }
             else if (isRampage)
             {
-                spawnInterval = 1.5f;
+                spawnInterval = Random.Range(0.5f, 1.5f);
             }
 
-            Invoke("SpawnEnemy", (spawnInterval));
+            if (settlementController.settlementLvl <= 6)
+            {
+                Invoke("SpawnEnemy", (spawnInterval));
+            }
+
         }
     }
 

@@ -52,7 +52,6 @@ public class SettlementShop : ShopManager
                 {
                     audioSource.PlayOneShot(buySfx);
                     playerController.darkLeaf -= settlementRepairCost;
-                    settlementController.settlementCurrentHp = settlementController.settlementMaxHp;
                     hammerAnimationObject.SetActive(true);
                     playerController.UpdateLeafCount();
                 }

@@ -13,6 +13,7 @@ TagManager:
   - SettlementHealth
   - AttackPoint
   - InsideSettlement
+  - PlayerClickBox
   layers:
   - Default
   - TransparentFX

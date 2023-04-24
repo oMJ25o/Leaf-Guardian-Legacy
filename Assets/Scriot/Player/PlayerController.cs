@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int attackDamage;
     [HideInInspector] public int lightLeaf;
     [HideInInspector] public int darkLeaf;
+    [HideInInspector] public bool isAttacking = false;
+    [HideInInspector] public bool isAttackingRight = false;
+    [HideInInspector] public bool isAttackingLeft = false;
     private float newPlayerSpeed;
     private float rollCounter;
     private float rollCoolCounter;
@@ -84,16 +87,28 @@ public class PlayerController : MonoBehaviour
         darkLeafCountText.text = "x" + darkLeaf;
     }
 
-    private void PlayerAttack()
+    public void PlayerAttack()
     {
-        if (Input.GetMouseButtonDown(0) && canAttack && !playerAnimator.GetBool("SpaceBool") && !isInsideSettlement && !GameManager.Instance.isGameOver)
+        if (isAttacking && canAttack && !playerAnimator.GetBool("SpaceBool") && !isInsideSettlement && !GameManager.Instance.isGameOver)
         {
             canAttack = false;
             isAttack = true;
+
+            if (isAttackingRight && playerSpriteRenderer.flipX == true)
+            {
+                PlayerFaceRight();
+            }
+            else if (isAttackingLeft && playerSpriteRenderer.flipX == false)
+            {
+                PlayerFaceLeft();
+            }
+
             playerAnimator.Play("Attack");
             playerAnimator.SetBool("IsAttacking", isAttack);
             startCooldown = attackCooldown;
         }
+
+        isAttacking = false;
 
         if (startCooldown > 0)
         {
@@ -134,6 +149,9 @@ public class PlayerController : MonoBehaviour
     private void AttackFinish()
     {
         isAttack = false;
+        isAttacking = false;
+        isAttackingRight = false;
+        isAttackingLeft = false;
         playerAnimator.SetBool("IsAttacking", isAttack);
     }
 
@@ -147,15 +165,11 @@ public class PlayerController : MonoBehaviour
             {
                 case 1:
                     playerAnimator.SetBool("IsMoving", true);
-                    attackPointRight.SetActive(true);
-                    attackPointLeft.SetActive(false);
-                    playerSpriteRenderer.flipX = false;
+                    PlayerFaceRight();
                     break;
                 case -1:
                     playerAnimator.SetBool("IsMoving", true);
-                    attackPointLeft.SetActive(true);
-                    attackPointRight.SetActive(false);
-                    playerSpriteRenderer.flipX = true;
+                    PlayerFaceLeft();
                     break;
                 case 0:
                     playerAnimator.SetBool("IsMoving", false);
@@ -172,6 +186,20 @@ public class PlayerController : MonoBehaviour
                 gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
             }
         }
+    }
+
+    private void PlayerFaceRight()
+    {
+        attackPointRight.SetActive(true);
+        attackPointLeft.SetActive(false);
+        playerSpriteRenderer.flipX = false;
+    }
+
+    private void PlayerFaceLeft()
+    {
+        attackPointLeft.SetActive(true);
+        attackPointRight.SetActive(false);
+        playerSpriteRenderer.flipX = true;
     }
 
     private void RollPlayer()
