@@ -7612,6 +7612,7 @@ MonoBehaviour:
   settlementMaxHp: 250
   settlementLvl: 1
   settlementCurrentExp: 0
+  playerController: {fileID: 95482389}
   settlementExpToLevelUp: 200
   hurtParticles: {fileID: 143155213}
   hurtParticles2: {fileID: 2112131907}
@@ -24533,7 +24534,7 @@ MonoBehaviour:
   buySfx: {fileID: 8300000, guid: 07cdb6a37f7e5474c9c1c8aea672d32a, type: 3}
   audioSource: {fileID: 1158329389}
   playerAttackDamageUpgrade: 15
-  playerAttackDamageUpgradeCost: 50
+  playerAttackDamageUpgradeCost: 40
   playerAttackDamageUpgradeCostText: {fileID: 1577769582}
   playerAttackDamageUpgradeText: {fileID: 1429705133}
   playerAttackDamageUpgradeCountText: {fileID: 1352818123}

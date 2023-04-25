@@ -8,6 +8,7 @@ public class SettlementController : MonoBehaviour
     public float settlementMaxHp = 100f;
     public int settlementLvl = 1;
     public float settlementCurrentExp = 0;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private int settlementExpToLevelUp = 50;
     [SerializeField] private ParticleSystem hurtParticles;
     [SerializeField] private ParticleSystem hurtParticles2;
@@ -36,6 +37,24 @@ public class SettlementController : MonoBehaviour
     {
         hurtParticles.Play();
         hurtParticles2.Play();
+        int leafInt = Random.Range(0, 2);
+        if (leafInt == 0 && playerController.lightLeaf > 0)
+        {
+            playerController.lightLeaf -= Random.Range(1, 4);
+            if (playerController.lightLeaf < 0)
+            {
+                playerController.lightLeaf = 0;
+            }
+        }
+        else if (leafInt == 1 && playerController.darkLeaf > 0)
+        {
+            playerController.darkLeaf -= Random.Range(1, 4);
+            if (playerController.darkLeaf < 0)
+            {
+                playerController.darkLeaf = 0;
+            }
+        }
+        playerController.UpdateLeafCount();
     }
 
     public void SettlementDisplay()
