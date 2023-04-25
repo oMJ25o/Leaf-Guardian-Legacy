@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private CameraFollow cam;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private Animator fadeInAnimator;
 
 
     [HideInInspector] public bool isGameOver = false;
@@ -54,8 +55,7 @@ public class GameManager : MonoBehaviour
 
     public void StartFadeIn()
     {
-        gameObject.GetComponent<Image>().enabled = true;
-        gameObject.GetComponent<Animator>().Play("FadeIn");
+        fadeInAnimator.Play("FadeIn");
     }
 
     public void StartVictoryScreen()

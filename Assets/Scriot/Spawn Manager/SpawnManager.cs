@@ -101,6 +101,7 @@ public class SpawnManager : MonoBehaviour
                     rampageCurrentTimer = finalRampageTimer;
                     rampageEventText.SetActive(true);
                     rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Final Rampage: " + rampageCurrentTimer;
+                    StopAllCoroutines();
                     StartCoroutine("StartFinalRampageTimer");
                     break;
             }
