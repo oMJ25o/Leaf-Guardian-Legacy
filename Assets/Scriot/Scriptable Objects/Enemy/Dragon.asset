@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dd7127298f4214c9aca18607243a04, type: 3}
   m_Name: Dragon
   m_EditorClassIdentifier: 
-  hp: 75
-  attackDamage: 40
+  hp: 60
+  attackDamage: 30
   moveSpeed: 5
-  exp: 1000
+  exp: 1500

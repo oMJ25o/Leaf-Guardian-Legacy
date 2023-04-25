@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraFollow cam;
     [SerializeField] private GameObject gameOverUI;
 
+
     [HideInInspector] public bool isGameOver = false;
+    [HideInInspector] public bool isFinalRampageFinish = false;
+    [HideInInspector] public bool isPlayerVictory = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,21 +28,38 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGameOver)
+        if (isGameOver || isPlayerVictory)
         {
             settlementLvl.SetActive(false);
             settlementHp.SetActive(false);
             inventory.SetActive(false);
         }
+
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && isFinalRampageFinish == true)
+        {
+            isPlayerVictory = true;
+            StartFadeIn();
+        }
     }
 
     public void StartGameOver()
     {
-        if (isGameOver)
+        if (isGameOver && !isPlayerVictory)
         {
             cam.PlayGameOverMusic();
             gameOverUI.SetActive(true);
         }
 
+    }
+
+    public void StartFadeIn()
+    {
+        gameObject.GetComponent<Image>().enabled = true;
+        gameObject.GetComponent<Animator>().Play("FadeIn");
+    }
+
+    public void StartVictoryScreen()
+    {
+        SceneManager.LoadScene("VictoryScene");
     }
 }

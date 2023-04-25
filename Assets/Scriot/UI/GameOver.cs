@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    [SerializeField] private GameObject backToMenuButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,11 @@ public class GameOver : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("StartMenuScene");
+    }
+
+    public void ShowButton()
+    {
+        backToMenuButton.SetActive(true);
     }
 
 }

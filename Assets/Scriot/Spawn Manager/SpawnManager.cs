@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject rampageEventText;
     [SerializeField] private CameraFollow cam;
     [SerializeField] private int rampageEventTimer;
+    [SerializeField] private int finalRampageTimer;
 
     private int rampageCurrentTimer;
     private float spawnInterval;
@@ -33,7 +34,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SetupRampageEvent()
     {
-        if (!isGameOver)
+        if (!isGameOver && settlementController.settlementLvl < 6)
         {
             cam.PlayNormalMusic();
             rampageEventText.SetActive(false);
@@ -97,8 +98,10 @@ public class SpawnManager : MonoBehaviour
                     Instantiate(enemyPrefabs[4], enemyPrefabs[4].transform.position, enemyPrefabs[4].transform.rotation);
                     break;
                 case >= 6:
-                    int randomIndex = Random.Range(0, enemyPrefabs.Length);
-                    Instantiate(enemyPrefabs[randomIndex], enemyPrefabs[randomIndex].transform.position, enemyPrefabs[randomIndex].transform.rotation);
+                    rampageCurrentTimer = finalRampageTimer;
+                    rampageEventText.SetActive(true);
+                    rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Final Rampage: " + rampageCurrentTimer;
+                    StartCoroutine("StartFinalRampageTimer");
                     break;
             }
 
@@ -111,11 +114,52 @@ public class SpawnManager : MonoBehaviour
                 spawnInterval = Random.Range(0.5f, 1.5f);
             }
 
-            if (settlementController.settlementLvl <= 6)
+            if (settlementController.settlementLvl < 6)
             {
                 Invoke("SpawnEnemy", (spawnInterval));
             }
+        }
+    }
 
+    IEnumerator StartFinalRampageTimer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            rampageCurrentTimer -= 1;
+            rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Final Rampage: " + rampageCurrentTimer;
+
+            if (rampageCurrentTimer <= 0)
+            {
+                cam.PlayRampageEventMusic();
+                rampageCurrentTimer = 90;
+                StartCoroutine("StartFinalRampage");
+                break;
+            }
+        }
+    }
+
+    IEnumerator StartFinalRampage()
+    {
+        while (true)
+        {
+            if (rampageCurrentTimer >= 90)
+            {
+                rampageEventText.GetComponent<TMPro.TMP_Text>().text = "Final Rampage: Survive!";
+                rampageEventText.GetComponent<Animator>().Play("Entrance");
+            }
+
+            int randomIndex = Random.Range(0, enemyPrefabs.Length);
+            Instantiate(enemyPrefabs[randomIndex], enemyPrefabs[randomIndex].transform.position, enemyPrefabs[randomIndex].transform.rotation);
+            yield return new WaitForSeconds(1);
+            rampageCurrentTimer -= 1;
+
+            if (rampageCurrentTimer <= 0)
+            {
+                //Start Victory Screen
+                GameManager.Instance.isFinalRampageFinish = true;
+                break;
+            }
         }
     }
 

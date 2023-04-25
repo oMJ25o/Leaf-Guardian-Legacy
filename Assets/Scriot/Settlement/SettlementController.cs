@@ -52,7 +52,7 @@ public class SettlementController : MonoBehaviour
             settlementCurrentExp = 0;
             settlementLvl += 1;
             settlementMaxExp *= settlementLvl;
-            settlementMaxHp += 20;
+            settlementMaxHp += 100;
             settlementCurrentHp = settlementMaxHp;
             SettlementDisplay();
             spawnManager.SetupRampageEvent();
