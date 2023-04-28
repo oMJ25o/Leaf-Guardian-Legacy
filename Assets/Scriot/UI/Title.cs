@@ -8,7 +8,6 @@ public class Title : MonoBehaviour
     [SerializeField] private GameObject nextTitle;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject optionButton;
-    [SerializeField] private GameObject exitButton;
     [SerializeField] private AudioClip explosionSFX;
     [SerializeField] private AudioSource audioSource;
     // Start is called before the first frame update
@@ -36,7 +35,6 @@ public class Title : MonoBehaviour
         {
             startButton.SetActive(true);
             optionButton.SetActive(true);
-            exitButton.SetActive(true);
         }
     }
 
