@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject hudOptions;
     [SerializeField] private GameObject instructionObject;
     [SerializeField] private GameObject instructionHudTile;
+    [SerializeField] private GameObject Map;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +38,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        Map.SetActive(true);
     }
 
     public void ExitGame()
