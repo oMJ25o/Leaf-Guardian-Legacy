@@ -453,7 +453,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 231375431}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827678798}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: PlayerBuild
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: house1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1318223468}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &231375431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1947,7 +1971,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 568670440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827678798}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: PlayerBuild
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: playerUpgradeShop
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1549918164}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &568670440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7952,6 +8000,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af831783be566a94db63fa5b9e8e2185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  house1: {fileID: 856705130}
+  house2: {fileID: 1109916379}
+  house3: {fileID: 2049393465}
+  playerUpgradeShop: {fileID: 728757848}
+  houseCollider1: {fileID: 988343642}
+  houseCollider2: {fileID: 1984987943}
+  houseCollider3: {fileID: 567578350}
+  playerUpgradeShopCollider: {fileID: 353633087}
 --- !u!4 &827678799
 Transform:
   m_ObjectHideFlags: 0
@@ -10295,7 +10351,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1153652250}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827678798}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: PlayerBuild
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: house2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1403246818}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1153652250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17595,7 +17675,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1497428372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827678798}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: PlayerBuild
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: house3
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1980775671}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1497428372
 MonoBehaviour:
   m_ObjectHideFlags: 0
