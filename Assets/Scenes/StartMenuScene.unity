@@ -16302,6 +16302,7 @@ GameObject:
   - component: {fileID: 1437384637}
   - component: {fileID: 1437384636}
   - component: {fileID: 1437384638}
+  - component: {fileID: 1437384639}
   m_Layer: 0
   m_Name: MapTile
   m_TagString: Untagged
@@ -17500,6 +17501,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Map: {fileID: 1437384634}
   MainMenu: {fileID: 404727471}
+--- !u!114 &1437384639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437384634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c154064e1ded80d42b80f770162d175d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1469900694
 GameObject:
   m_ObjectHideFlags: 0
