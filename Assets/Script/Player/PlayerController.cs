@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TMP_Text darkLeafCountText;
     [SerializeField] private GameObject attackPointRight;
     [SerializeField] private GameObject attackPointLeft;
+    [SerializeField] private GameObject houseSign1;
+    [SerializeField] private GameObject houseSign2;
+    [SerializeField] private GameObject houseSign3;
+    [SerializeField] private GameObject playerUpgradeSign;
     [SerializeField] private GameObject weaponShop;
     [SerializeField] private GameObject settlementShop;
 
@@ -52,10 +56,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attackDamage = playerData.attackDamage;
+        /*attackDamage = playerData.attackDamage;
         lightLeaf = playerData.lightleaf;
         darkLeaf = playerData.darkleaf;
-        UpdateLeafCount();
+        UpdateLeafCount();*/
 
         newPlayerSpeed = playerSpeed;
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -67,13 +71,14 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RollPlayer();
+        /*
         PlayerAttack();
 
         if (GameManager.Instance.isGameOver)
         {
             weaponShop.SetActive(false);
             weaponShop.SetActive(false);
-        }
+        }*/
     }
 
     private void PlayAttackSFX()
@@ -157,35 +162,35 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (!isAttack && !GameManager.Instance.isGameOver)
+        //if (!isAttack && !GameManager.Instance.isGameOver)
+        //{
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        switch (horizontalInput)
         {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-
-            switch (horizontalInput)
-            {
-                case 1:
-                    playerAnimator.SetBool("IsMoving", true);
-                    PlayerFaceRight();
-                    break;
-                case -1:
-                    playerAnimator.SetBool("IsMoving", true);
-                    PlayerFaceLeft();
-                    break;
-                case 0:
-                    playerAnimator.SetBool("IsMoving", false);
-                    break;
-            }
-
-            gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
-            if (gameObject.transform.position.x < -leftBorder)
-            {
-                gameObject.transform.position = new Vector3(-leftBorder, transform.position.y, transform.position.z);
-            }
-            else if (gameObject.transform.position.x > rightBorder)
-            {
-                gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
-            }
+            case 1:
+                playerAnimator.SetBool("IsMoving", true);
+                PlayerFaceRight();
+                break;
+            case -1:
+                playerAnimator.SetBool("IsMoving", true);
+                PlayerFaceLeft();
+                break;
+            case 0:
+                playerAnimator.SetBool("IsMoving", false);
+                break;
         }
+
+        gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
+        /*if (gameObject.transform.position.x < -leftBorder)
+        {
+            gameObject.transform.position = new Vector3(-leftBorder, transform.position.y, transform.position.z);
+        }
+        else if (gameObject.transform.position.x > rightBorder)
+        {
+            gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
+        }*/
+        //}
     }
 
     private void PlayerFaceRight()
@@ -234,7 +239,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("WeaponShop") && !GameManager.Instance.isGameOver)
+        if (other.gameObject.CompareTag("BuildSign"))
+        {
+            switch (other.name)
+            {
+                case "HouseSignCollider1":
+                    houseSign1.SetActive(true);
+                    break;
+                case "HouseSignCollider2":
+                    houseSign2.SetActive(true);
+                    break;
+                case "HouseSignCollider3":
+                    houseSign3.SetActive(true);
+                    break;
+                case "PlayerUpgradeSignCollider":
+                    playerUpgradeSign.SetActive(true);
+                    break;
+            }
+        }
+        else if (other.gameObject.CompareTag("WeaponShop") && !GameManager.Instance.isGameOver)
         {
             weaponShop.SetActive(true);
         }
@@ -251,7 +274,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("WeaponShop"))
+        if (other.gameObject.CompareTag("BuildSign"))
+        {
+            switch (other.name)
+            {
+                case "HouseSignCollider1":
+                    houseSign1.SetActive(false);
+                    break;
+                case "HouseSignCollider2":
+                    houseSign2.SetActive(false);
+                    break;
+                case "HouseSignCollider3":
+                    houseSign3.SetActive(false);
+                    break;
+                case "PlayerUpgradeSignCollider":
+                    playerUpgradeSign.SetActive(false);
+                    break;
+            }
+        }
+        else if (other.gameObject.CompareTag("WeaponShop"))
         {
             weaponShop.SetActive(false);
         }
