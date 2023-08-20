@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip attackSfx;
     [SerializeField] private Animator attackFXRight;
     [SerializeField] private Animator attackFXLeft;
-    [SerializeField] private TMP_Text lightLeafCountText;
-    [SerializeField] private TMP_Text darkLeafCountText;
+    [SerializeField] private TMP_Text playerHPText;
+    [SerializeField] private TMP_Text leafCountText;
     [SerializeField] private GameObject attackPointRight;
     [SerializeField] private GameObject attackPointLeft;
     [SerializeField] private GameObject houseSign1;
@@ -34,9 +34,10 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerSpriteRenderer;
 
+    [HideInInspector] public int playerCurrentHP;
+    [HideInInspector] public int playerMaxHP;
     [HideInInspector] public int attackDamage;
-    [HideInInspector] public int lightLeaf;
-    [HideInInspector] public int darkLeaf;
+    [HideInInspector] public int leaf;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isAttackingRight = false;
     [HideInInspector] public bool isAttackingLeft = false;
@@ -56,10 +57,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*attackDamage = playerData.attackDamage;
-        lightLeaf = playerData.lightleaf;
-        darkLeaf = playerData.darkleaf;
-        UpdateLeafCount();*/
+        attackDamage = playerData.attackDamage;
+        leaf = playerData.leaf;
+        playerCurrentHP = playerData.maxHP;
+        playerMaxHP = playerData.maxHP;
+        UpdateLeafCount();
+        UpdateHP();
 
         newPlayerSpeed = playerSpeed;
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -71,9 +74,10 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RollPlayer();
-        /*
+
         PlayerAttack();
 
+        /*
         if (GameManager.Instance.isGameOver)
         {
             weaponShop.SetActive(false);
@@ -86,15 +90,19 @@ public class PlayerController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(attackSfx);
     }
 
+    public void UpdateHP()
+    {
+        playerHPText.text = playerCurrentHP + "/" + playerMaxHP;
+    }
+
     public void UpdateLeafCount()
     {
-        lightLeafCountText.text = "x" + lightLeaf;
-        darkLeafCountText.text = "x" + darkLeaf;
+        leafCountText.text = leaf.ToString();
     }
 
     public void PlayerAttack()
     {
-        if (isAttacking && canAttack && !playerAnimator.GetBool("SpaceBool") && !isInsideSettlement && !GameManager.Instance.isGameOver)
+        if (isAttacking && canAttack && !playerAnimator.GetBool("SpaceBool") /*&& !isInsideSettlement && !GameManager.Instance.isGameOver*/)
         {
             canAttack = false;
             isAttack = true;
@@ -162,35 +170,35 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        //if (!isAttack && !GameManager.Instance.isGameOver)
-        //{
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        if (!isAttack /*&& !GameManager.Instance.isGameOver*/)
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        switch (horizontalInput)
-        {
-            case 1:
-                playerAnimator.SetBool("IsMoving", true);
-                PlayerFaceRight();
-                break;
-            case -1:
-                playerAnimator.SetBool("IsMoving", true);
-                PlayerFaceLeft();
-                break;
-            case 0:
-                playerAnimator.SetBool("IsMoving", false);
-                break;
-        }
+            switch (horizontalInput)
+            {
+                case 1:
+                    playerAnimator.SetBool("IsMoving", true);
+                    PlayerFaceRight();
+                    break;
+                case -1:
+                    playerAnimator.SetBool("IsMoving", true);
+                    PlayerFaceLeft();
+                    break;
+                case 0:
+                    playerAnimator.SetBool("IsMoving", false);
+                    break;
+            }
 
-        gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
-        /*if (gameObject.transform.position.x < -leftBorder)
-        {
-            gameObject.transform.position = new Vector3(-leftBorder, transform.position.y, transform.position.z);
+            gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
+            /*if (gameObject.transform.position.x < -leftBorder)
+            {
+                gameObject.transform.position = new Vector3(-leftBorder, transform.position.y, transform.position.z);
+            }
+            else if (gameObject.transform.position.x > rightBorder)
+            {
+                gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
+            }*/
         }
-        else if (gameObject.transform.position.x > rightBorder)
-        {
-            gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
-        }*/
-        //}
     }
 
     private void PlayerFaceRight()
@@ -209,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
     private void RollPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isAttack && (horizontalInput > 0 || horizontalInput < 0) && !GameManager.Instance.isGameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && !isAttack && (horizontalInput > 0 || horizontalInput < 0) /*&& !GameManager.Instance.isGameOver*/)
         {
             if (rollCoolCounter <= 0 && rollCounter <= 0)
             {

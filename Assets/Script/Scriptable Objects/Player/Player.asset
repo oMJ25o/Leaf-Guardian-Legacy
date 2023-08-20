@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a392f38721f12b440a63683697f94ce3, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  currentHP: 0
+  maxHP: 20
   attackDamage: 13
-  lightleaf: 0
-  darkleaf: 0
+  leaf: 5

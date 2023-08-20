@@ -36,9 +36,9 @@ public class Enemy : MonoBehaviour
 
     private void SetupEnemy()
     {
-        settlementController = GameObject.Find("Tower Tile Set").GetComponent<SettlementController>();
-        currentHp = enemyData.hp * settlementController.settlementLvl;
-        maxHp = enemyData.hp * settlementController.settlementLvl;
+        settlementController = GameObject.Find("SettlementManager").GetComponent<SettlementController>();
+        maxHp = enemyData.hp;
+        currentHp = maxHp;
         attackDamage = enemyData.attackDamage;
         moveSpeed = enemyData.moveSpeed;
         exp = enemyData.exp;
@@ -54,9 +54,6 @@ public class Enemy : MonoBehaviour
             if (currentHp <= 0)
             {
                 currentHp = 0;
-                settlementController.settlementCurrentExp += exp;
-                settlementController.CheckExpToLevelUp();
-                settlementController.SettlementDisplay();
                 enemyAnimator.SetBool("Dead", true);
             }
             UpdateHealthBar();
@@ -92,18 +89,7 @@ public class Enemy : MonoBehaviour
 
     private void PlayAttackSFX()
     {
-        settlementController.PlayHurtParticles();
-        settlementController.settlementCurrentHp -= attackDamage;
         audioSource.PlayOneShot(attackSfx);
-
-        if (settlementController.settlementCurrentHp <= 0)
-        {
-            settlementController.settlementCurrentHp = 0;
-            GameManager.Instance.isGameOver = true;
-            GameManager.Instance.StartGameOver();
-        }
-
-        settlementController.SettlementDisplay();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

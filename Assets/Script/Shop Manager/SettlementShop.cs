@@ -30,15 +30,14 @@ public class SettlementShop : ShopManager
 
     }
 
-    public override void BuyUpgrades(string upgradeName)
+    /*public override void BuyUpgrades(string upgradeName)
     {
         switch (upgradeName)
         {
             case "SettlementHp":
-                if (CheckEnoughCurrency(CalculateCost(settlementHpUpgradeCost), playerController.darkLeaf))
+                if (CheckEnoughCurrency(CalculateCost(settlementHpUpgradeCost)))
                 {
                     audioSource.PlayOneShot(buySfx);
-                    playerController.darkLeaf -= CalculateCost(settlementHpUpgradeCost);
                     settlementController.settlementMaxHp += settlementHpUpgrade;
                     settlementController.settlementCurrentHp += settlementHpUpgrade;
                     settlementController.SettlementDisplay();
@@ -48,15 +47,14 @@ public class SettlementShop : ShopManager
                 }
                 return;
             case "Repair":
-                if (CheckEnoughCurrency(settlementRepairCost, playerController.darkLeaf))
+                if (CheckEnoughCurrency(settlementRepairCost))
                 {
                     audioSource.PlayOneShot(buySfx);
-                    playerController.darkLeaf -= settlementRepairCost;
                     hammerAnimationObject.SetActive(true);
                     playerController.UpdateLeafCount();
                 }
                 return;
         }
-    }
+    }*/
 
 }

@@ -15,8 +15,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private SettlementController settlementController;
     [SerializeField] private TMP_Text settlementLvlText;
-    [SerializeField] private float yOffSet = 5f;
-    [SerializeField] private float zPos = -21f;
+    [SerializeField] private float yOffSet = 13.6f;
+    [SerializeField] private float zPos = -10f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = new Vector3(player.transform.position.x, yOffSet, zPos);
-        UpdateSettlementDisplay();
+        //UpdateSettlementDisplay();
     }
 
     public void PlayRampageEventMusic()
@@ -67,13 +67,6 @@ public class CameraFollow : MonoBehaviour
         {
             settlementHpObject.SetActive(true);
             settlementLvlObject.SetActive(true);
-            UpdateSettlementDisplay();
         }
-    }
-
-    public void UpdateSettlementDisplay()
-    {
-        settlementHpBar.transform.localScale = new Vector3((settlementController.settlementCurrentHp / settlementController.settlementMaxHp), settlementHpBar.transform.localScale.y, settlementHpBar.transform.localScale.z);
-        settlementLvlText.text = "" + settlementController.settlementLvl;
     }
 }
