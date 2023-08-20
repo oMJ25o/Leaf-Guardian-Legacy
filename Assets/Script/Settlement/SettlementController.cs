@@ -17,4 +17,10 @@ public class SettlementController : MonoBehaviour
         houseBuilt += 1;
     }
 
+    public void AddLeafToPlayer()
+    {
+        playerController.leaf += houseBuilt;
+        playerController.UpdateLeafCount();
+    }
+
 }

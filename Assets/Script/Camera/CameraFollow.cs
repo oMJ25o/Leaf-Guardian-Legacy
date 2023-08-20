@@ -17,6 +17,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private TMP_Text settlementLvlText;
     [SerializeField] private float yOffSet = 13.6f;
     [SerializeField] private float zPos = -10f;
+    [SerializeField] private float maxXPosRight;
+    [SerializeField] private float maxXPosLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,14 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = new Vector3(player.transform.position.x, yOffSet, zPos);
+        if (gameObject.transform.position.x > maxXPosRight)
+        {
+            gameObject.transform.position = new Vector3(maxXPosRight, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+        else if (gameObject.transform.position.x < maxXPosLeft)
+        {
+            gameObject.transform.position = new Vector3(maxXPosLeft, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
         //UpdateSettlementDisplay();
     }
 

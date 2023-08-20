@@ -18,8 +18,8 @@ public class SettlementShop : ShopManager
     // Start is called before the first frame update
     void Start()
     {
-        UpdateUpgradeCost(settlementHpUpgradeCostText, settlementHpUpgradeCost);
-        UpdateUpgradeCost(settlementHpRepairCostText, settlementRepairCost);
+        //UpdateUpgradeCost(settlementHpUpgradeCostText, settlementHpUpgradeCost);
+        //UpdateUpgradeCost(settlementHpRepairCostText, settlementRepairCost);
         settlementHpUpgradeText.text = "HP: +" + settlementHpUpgrade;
         gameObject.SetActive(false);
     }

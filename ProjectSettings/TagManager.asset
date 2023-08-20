@@ -49,6 +49,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 880552751
+    locked: 0
+  - name: Trees
+    uniqueID: 1849563977
+    locked: 0
+  - name: Ground
+    uniqueID: 1093746439
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

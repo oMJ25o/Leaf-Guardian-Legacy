@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 1240475814435866681}
   - component: {fileID: 1240475814435866683}
   m_Layer: 7
-  m_Name: Player Caveman
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

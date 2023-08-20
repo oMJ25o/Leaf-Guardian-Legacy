@@ -11,6 +11,7 @@ public class BuildController : MonoBehaviour
     [SerializeField] private GameObject house2;
     [SerializeField] private GameObject house3;
     [SerializeField] private GameObject playerUpgradeShop;
+    [SerializeField] private SettlementController settlementController;
 
     [SerializeField] private TMP_Text[] houseCostTexts;
     [SerializeField] private TMP_Text playerUpgradeCostText;
@@ -55,6 +56,7 @@ public class BuildController : MonoBehaviour
                     playerController.UpdateLeafCount();
                     house1.SetActive(true);
                     houseCollider1.SetActive(false);
+                    settlementController.AddHouse();
                 }
                 break;
             case "house2":
@@ -64,6 +66,7 @@ public class BuildController : MonoBehaviour
                     playerController.UpdateLeafCount();
                     house2.SetActive(true);
                     houseCollider2.SetActive(false);
+                    settlementController.AddHouse();
                 }
                 break;
             case "house3":
@@ -73,6 +76,7 @@ public class BuildController : MonoBehaviour
                     playerController.UpdateLeafCount();
                     house3.SetActive(true);
                     houseCollider3.SetActive(false);
+                    settlementController.AddHouse();
                 }
                 break;
             case "playerUpgradeShop":

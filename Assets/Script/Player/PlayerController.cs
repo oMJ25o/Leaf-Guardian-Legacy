@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip attackSfx;
     [SerializeField] private Animator attackFXRight;
     [SerializeField] private Animator attackFXLeft;
-    [SerializeField] private TMP_Text playerHPText;
     [SerializeField] private TMP_Text leafCountText;
     [SerializeField] private GameObject attackPointRight;
     [SerializeField] private GameObject attackPointLeft;
@@ -37,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int playerCurrentHP;
     [HideInInspector] public int playerMaxHP;
     [HideInInspector] public int attackDamage;
+    [HideInInspector] public float attackSpeed;
     [HideInInspector] public int leaf;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isAttackingRight = false;
@@ -58,11 +58,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         attackDamage = playerData.attackDamage;
+        attackSpeed = playerData.attackSpeed;
         leaf = playerData.leaf;
-        playerCurrentHP = playerData.maxHP;
-        playerMaxHP = playerData.maxHP;
         UpdateLeafCount();
-        UpdateHP();
 
         newPlayerSpeed = playerSpeed;
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -88,11 +86,6 @@ public class PlayerController : MonoBehaviour
     private void PlayAttackSFX()
     {
         GetComponent<AudioSource>().PlayOneShot(attackSfx);
-    }
-
-    public void UpdateHP()
-    {
-        playerHPText.text = playerCurrentHP + "/" + playerMaxHP;
     }
 
     public void UpdateLeafCount()
@@ -123,12 +116,12 @@ public class PlayerController : MonoBehaviour
 
         isAttacking = false;
 
-        if (startCooldown > 0)
+        if ((startCooldown - attackSpeed) > 0)
         {
             startCooldown -= Time.deltaTime;
         }
 
-        if (startCooldown <= 0)
+        if ((startCooldown - attackSpeed) <= 0)
         {
             canAttack = true;
         }
@@ -190,14 +183,14 @@ public class PlayerController : MonoBehaviour
             }
 
             gameObject.transform.Translate(transform.right * newPlayerSpeed * Time.deltaTime * horizontalInput);
-            /*if (gameObject.transform.position.x < -leftBorder)
+            if (gameObject.transform.position.x < leftBorder)
             {
-                gameObject.transform.position = new Vector3(-leftBorder, transform.position.y, transform.position.z);
+                gameObject.transform.position = new Vector3(leftBorder, transform.position.y, transform.position.z);
             }
             else if (gameObject.transform.position.x > rightBorder)
             {
                 gameObject.transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
-            }*/
+            }
         }
     }
 
@@ -265,15 +258,15 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
-        else if (other.gameObject.CompareTag("WeaponShop") && !GameManager.Instance.isGameOver)
+        else if (other.gameObject.CompareTag("WeaponShop"))
         {
             weaponShop.SetActive(true);
         }
-        else if (other.gameObject.CompareTag("SettlementShop") && !GameManager.Instance.isGameOver)
+        else if (other.gameObject.CompareTag("SettlementShop"))
         {
             settlementShop.SetActive(true);
         }
-        else if (other.gameObject.CompareTag("InsideSettlement") && !GameManager.Instance.isGameOver)
+        else if (other.gameObject.CompareTag("InsideSettlement"))
         {
             isInsideSettlement = true;
         }

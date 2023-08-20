@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject enemyHpBar;
     [SerializeField] private AudioClip attackSfx;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private bool isDrop;
+
     [HideInInspector] public float currentHp;
     [HideInInspector] public float maxHp;
     [HideInInspector] public int attackDamage;
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
     private bool nearTarget = false;
     private Animator enemyAnimator;
     private SettlementController settlementController;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,7 @@ public class Enemy : MonoBehaviour
     private void SetupEnemy()
     {
         settlementController = GameObject.Find("SettlementManager").GetComponent<SettlementController>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         maxHp = enemyData.hp;
         currentHp = maxHp;
         attackDamage = enemyData.attackDamage;
@@ -62,6 +66,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDespawn()
     {
+        if (isDrop)
+        {
+            playerController.leaf += 1;
+            playerController.UpdateLeafCount();
+        }
         Destroy(gameObject);
     }
 
