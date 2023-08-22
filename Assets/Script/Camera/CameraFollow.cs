@@ -6,15 +6,13 @@ using TMPro;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject settlementHpObject;
-    [SerializeField] private GameObject settlementLvlObject;
+    [SerializeField] private GameObject settlementHudObject;
     [SerializeField] private GameObject settlementHpBar;
     [SerializeField] private AudioClip rampageEventMusic;
     [SerializeField] private AudioClip normalMusic;
     [SerializeField] private AudioClip gameOverMusic;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private SettlementController settlementController;
-    [SerializeField] private TMP_Text settlementLvlText;
     [SerializeField] private float yOffSet = 13.6f;
     [SerializeField] private float zPos = -10f;
     [SerializeField] private float maxXPosRight;
@@ -64,19 +62,19 @@ public class CameraFollow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("SettlementHealth"))
+        if (other.gameObject.CompareTag("Tower"))
         {
-            settlementHpObject.SetActive(false);
-            settlementLvlObject.SetActive(false);
+            settlementHudObject.SetActive(false);
+            settlementHpBar.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("SettlementHealth"))
+        if (other.gameObject.CompareTag("Tower"))
         {
-            settlementHpObject.SetActive(true);
-            settlementLvlObject.SetActive(true);
+            settlementHudObject.SetActive(true);
+            settlementHpBar.SetActive(false);
         }
     }
 }

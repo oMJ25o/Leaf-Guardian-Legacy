@@ -20,6 +20,8 @@ public class WeaponShop : ShopManager
         UpdateUpgradeCost(playerAttackDamageUpgradeCostText, playerAttackDamageUpgradeCost, weaponUpgradeCount);
         playerAttackDamageUpgradeCountText.text = "x" + weaponUpgradeCount;
         playerAttackSpeedUpgradeCountText.text = "x" + glovesUpgradeCount;
+        playerAttackDamageUpgradeCostText.text = playerAttackDamageUpgradeCost.ToString();
+        playerAttackSpeedUpgradeCostText.text = playerAttackSpeedUpgradeCost.ToString();
     }
 
     // Update is called once per frame

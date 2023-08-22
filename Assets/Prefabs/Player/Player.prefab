@@ -135,7 +135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240475814435866658}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10, y: 0.55000067, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -213,10 +213,13 @@ MonoBehaviour:
   attackSfx: {fileID: 8300000, guid: 5b5f7e0139a665e4f91dbcaa96714497, type: 3}
   attackFXRight: {fileID: 1240475814960983668}
   attackFXLeft: {fileID: 1240475814220785805}
-  lightLeafCountText: {fileID: 0}
-  darkLeafCountText: {fileID: 0}
+  leafCountText: {fileID: 0}
   attackPointRight: {fileID: 1240475814960983675}
   attackPointLeft: {fileID: 1240475814220785843}
+  houseSign1: {fileID: 0}
+  houseSign2: {fileID: 0}
+  houseSign3: {fileID: 0}
+  playerUpgradeSign: {fileID: 0}
   weaponShop: {fileID: 0}
   settlementShop: {fileID: 0}
   enemyLayers:
@@ -226,16 +229,19 @@ MonoBehaviour:
   rollSpeed: 2
   rollLength: 0.5
   rollCoolDown: 1
-  leftBorder: 40
-  rightBorder: 80
+  leftBorder: -57
+  rightBorder: 100
   attackCooldown: 0.8
   attackRange: 1
+  playerCurrentHP: 0
+  playerMaxHP: 0
   attackDamage: 0
-  lightLeaf: 0
-  darkLeaf: 0
+  attackSpeed: 0
+  leaf: 0
   isAttacking: 0
   isAttackingRight: 0
   isAttackingLeft: 0
+  isInsideSettlement: 0
 --- !u!50 &1240475814435866684
 Rigidbody2D:
   serializedVersion: 4

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isAttack = false;
     private bool canAttack = true;
-    private bool isInsideSettlement = true;
+    public bool isInsideSettlement;
 
     private Collider2D[] hitEnemies;
     private Animator trueAttackFX;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerAttack()
     {
-        if (isAttacking && canAttack && !playerAnimator.GetBool("SpaceBool") /*&& !isInsideSettlement && !GameManager.Instance.isGameOver*/)
+        if (isAttacking && canAttack && !playerAnimator.GetBool("SpaceBool") && !isInsideSettlement /*&& !GameManager.Instance.isGameOver*/)
         {
             canAttack = false;
             isAttack = true;
